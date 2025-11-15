@@ -23,6 +23,13 @@ def classificar_email(texto):
     # Define as categorias possíveis para classificação
     labels = ["Produtivo", "Improdutivo"]
     
+    # Lista de palavras-chave que indicam email improdutivo
+    palavras_improdutivas = ["natal", "reclamação", "festas", "festa", "promoção"]
+    
+    # Verifica se alguma palavra-chave improdutiva está presente no texto
+    if any(palavra in new_texto.lower() for palavra in palavras_improdutivas):
+        return "Improdutivo"
+
     # Executa a classificação usando o modelo BART
     resultado = classifier(new_texto, labels)
     
@@ -69,6 +76,9 @@ def limpar_texto(texto):
     
     # Codifica em UTF-8 ignorando caracteres inválidos, depois decodifica
     texto = texto.encode('utf-8', 'ignore').decode('utf-8')
+    
+    # Exibe o texto limpo no console para debug
+    print(repr(texto))
     
     # Remove espaços em branco no início e final
     return texto.strip()
