@@ -1,59 +1,48 @@
-# Importa pipeline de classificação zero-shot do Hugging Face Transformers
 from transformers import pipeline
-# Importa módulo de expressões regulares para processamento de texto
 import re
 
-# Inicializa o classificador usando modelo BART pré-treinado do Facebook
-# Modelo: facebook/bart-large-mnli - especializado em classificação de similaridade textual
-classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
+# Inicializa um classificador leve baseado em BERT multilíngue.
+# Usa "nlptown/bert-base-multilingual-uncased-sentiment" que retorna labels tipo "1 star"..."5 stars".
+# Escolhi este modelo por ser mais leve e suportar múltiplos idiomas (inclui PT-BR).
+classificador = pipeline(
+    "sentiment-analysis",
+    model="nlptown/bert-base-multilingual-uncased-sentiment"
+)
 
 def classificar_email(texto):
-    """
-    Classifica um email como 'Produtivo' ou 'Improdutivo'.
-    
-    Args:
-        texto (str): Texto do email a ser classificado
-        
-    Returns:
-        str: Categoria do email ('Produtivo' ou 'Improdutivo')
-    """
-    # Limpa o texto removendo caracteres inválidos e formatações
-    new_texto = limpar_texto(texto)
-    
-    # Define as categorias possíveis para classificação
-    labels = ["Produtivo", "Improdutivo"]
-    
+    # Normaliza e limpa o texto recebido para reduzir ruído
+    texto = limpar_texto(texto)
+
     # Lista de palavras-chave que indicam email improdutivo
     palavras_improdutivas = ["natal", "reclamação", "festas", "festa", "promoção"]
     
-    # Verifica se alguma palavra-chave improdutiva está presente no texto
-    if any(palavra in new_texto.lower() for palavra in palavras_improdutivas):
+    # Verifica se alguma palavra-chave improdutiva está presente no texto (comparação em minúsculas)
+    if any(palavra in texto.lower() for palavra in palavras_improdutivas):
+        # Retorna diretamente "Improdutivo" sem chamar o modelo (regra simples)
         return "Improdutivo"
-
-    # Executa a classificação usando o modelo BART
-    resultado = classifier(new_texto, labels)
+    if (len(texto) < 10):
+        return "Improdutivo"
     
-    # Extrai a categoria com maior confiança (primeira do resultado)
-    categoria = resultado['labels'][0]
-    
-    return categoria
-
-
-def gerar_resposta(categoria):
-    """
-    Gera uma resposta automática baseada na categoria do email.
-    
-    Args:
-        categoria (str): Categoria do email classificado
-        
-    Returns:
-        str: Mensagem de resposta apropriada para a categoria
-    """
-    # Se o email é produtivo, envia resposta detalhada
-    if categoria == "Produtivo":
-        return "Obrigado pelo contato! Sua solicitação foi recebida e será analisada em breve."
-    # Caso contrário, envia resposta genérica
+    # Chama o pipeline de classificação e obtém o primeiro resultado
+    resultado = classificador(texto)[0]
+    # O label vem no formato "1 star", "2 stars", etc. Extrai o dígito inicial e converte para int
+    estrelas = int(resultado["label"][0])
+    # Imprime número de estrelas no console para debug/monitoramento
+    print(estrelas)
+    # Interpreta 3-5 estrelas como conteúdo produtivo, 1-2 como não produtivo
+    if estrelas >= 3:
+        return "Produtivo"
     else:
+        return "Não Produtivo"
+
+
+def gerar_resposta(classificacao):
+    # Gera uma resposta padrão dependendo da classificação recebida
+    if classificacao == "Produtivo":
+        # Resposta mais completa para mensagens consideradas úteis
+        return "Obrigado pelo contato! Sua solicitação foi recebida e será analisada em breve."
+    else:
+        # Resposta genérica para mensagens não produtivas/improdutivas
         return "Obrigado pelo contato!"
     
 
@@ -68,7 +57,7 @@ def limpar_texto(texto):
     Returns:
         str: Texto limpo e normalizado
     """
-    # Substitui quebras de linha por espaço
+    # Substitui quebras de linha por espaço para manter fraseado linear
     texto = texto.replace('\n', ' ')
     
     # Remove múltiplos espaços consecutivos usando regex
@@ -77,8 +66,8 @@ def limpar_texto(texto):
     # Codifica em UTF-8 ignorando caracteres inválidos, depois decodifica
     texto = texto.encode('utf-8', 'ignore').decode('utf-8')
     
-    # Exibe o texto limpo no console para debug
+    # Exibe o texto limpo no console para debug (útil durante desenvolvimento)
     print(repr(texto))
     
-    # Remove espaços em branco no início e final
+    # Remove espaços em branco no início e final e retorna
     return texto.strip()

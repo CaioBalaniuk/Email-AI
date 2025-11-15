@@ -1,5 +1,5 @@
 flask==3.0.2
 transformers==4.35.2
 tokenizers==0.15.0
-numpy==1.26.4
 pypdf2==3.0.1
+sentencepiece==0.1.99

@@ -1,6 +1,19 @@
-# 📧 AutoU - Classificador de Emails
+# 📧 AutoU — Classificador de Emails
 
-Um aplicativo web inteligente que classifica emails como **Produtivo** ou **Improdutivo** usando machine learning e inteligência artificial.
+Aplicação web que classifica emails como **Produtivo** ou **Improdutivo** usando modelos Hugging Face.
+
+> Observação: este README foi atualizado para refletir as dependências atuais do arquivo `requirements.txt`.
+
+---
+
+## Resumo rápido
+
+- Backend: Flask (Python)
+- Modelo usado: `nlptown/bert-base-multilingual-uncased-sentiment` (pipeline `sentiment-analysis`)
+- Interpretação usada no projeto:
+  - 1–2 stars → Improdutivo
+  - 3–5 stars → Produtivo
+- Regras adicionais (heurística): palavras-chave como `natal`, `reclamação`, `festas`, `festa`, `promoção` são classificadas automaticamente como "Improdutivo".
 
 ## 🎯 Sobre o Projeto
 
@@ -21,6 +34,23 @@ AutoU é uma solução automatizada para classificação de emails. O aplicativo
 - **Machine Learning**: Hugging Face Transformers (BART)
 - **Frontend**: HTML5, CSS3, JavaScript
 - **Processamento**: PyPDF2 (leitura de PDFs)
+
+## Dependências (conforme requirements.txt)
+
+Conteúdo atual de `requirements.txt`:
+
+```
+flask==3.0.2
+transformers==4.35.2
+tokenizers==0.15.0
+pypdf2==3.0.1
+sentencepiece==0.1.99
+```
+
+Observações:
+
+- `transformers` precisa de um backend (PyTorch ou TensorFlow). O projeto não fixa `torch` no `requirements.txt` — instale `torch` manualmente se necessário (ex.: `pip install torch` ou a build CUDA apropriada).
+- `pypdf2` está incluído para extração de texto de PDFs (PDFs baseados em imagem não são tratados automaticamente — veja a seção de problemas comuns).
 
 ## 📋 Pré-requisitos
 
@@ -61,7 +91,15 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 4. Execute a aplicação
+### 4. Instale PyTorch (se não estiver instalado). Exemplo CPU-only:
+
+```bash
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+```
+
+Para GPU, siga as instruções oficiais do PyTorch para escolher a build CUDA correta.
+
+### 5. Execute a aplicação
 
 ```bash
 python app.py
@@ -83,23 +121,6 @@ AutoU/
     ├── style.css              # Estilos CSS
     └── images/
         └── logo.jpeg          # Logo da aplicação
-```
-
-## 📦 Dependências
-
-O projeto requer os seguintes pacotes Python:
-
-```
-Flask==2.3.0
-transformers==4.30.0
-torch==2.0.0
-PyPDF2==3.0.1
-```
-
-Para instalar todas as dependências de uma vez, use:
-
-```bash
-pip install -r requirements.txt
 ```
 
 ## 🎨 Como Usar
@@ -223,6 +244,4 @@ Para dúvidas ou problemas, abra uma issue no repositório GitHub ou entre em co
 
 ---
 
-**Desenvolvido com ❤️ por [Seu Nome]**
-
-_Última atualização: Novembro de 2025_
+Última atualização: Novembro de 2025
