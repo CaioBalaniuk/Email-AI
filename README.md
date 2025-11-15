@@ -2,7 +2,6 @@
 
 Aplicação web que classifica emails como **Produtivo** ou **Improdutivo** usando modelos Hugging Face.
 
-> Observação: este README foi atualizado para refletir as dependências atuais do arquivo `requirements.txt`.
 
 ---
 
