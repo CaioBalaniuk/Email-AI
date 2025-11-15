@@ -1,18 +1,6 @@
-Flask==3.1.2
-PyPDF2==3.0.1
-requests==2.32.5
-numpy==2.2.6
-
-# Versões leves (CPU) para evitar imagens gigantes
---extra-index-url https://download.pytorch.org/whl/cpu
-torch==2.3.0+cpu
-
-transformers==4.39.3   # última versão estável leve antes das mudanças pesadas
-tokenizers==0.19.1      # compatível e MUITO mais leve
-huggingface-hub==0.22.2
-safetensors==0.4.2
-
-tqdm==4.67.1
-regex==2024.04.16
-PyYAML==6.0.3
-typing_extensions==4.15.0
+flask
+transformers==4.35.2
+tokenizers==0.15.0
+torch
+numpy
+pypdf2
