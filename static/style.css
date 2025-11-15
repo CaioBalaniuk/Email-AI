@@ -1,0 +1,332 @@
+/* ===== ESTILOS GLOBAIS ===== */
+/* Remove margens padrão e define fonte global */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  -webkit-font-smoothing: antialiased;   /* Suavização de fonte no Chrome e Safari */
+  -moz-osx-font-smoothing: grayscale;    /* Suavização de fonte no Firefox */
+  text-rendering: optimizeLegibility;    /* Melhora o kerning e ligaduras de texto */
+  color: #fff;
+  overflow-x: hidden; /* Previne scroll horizontal */
+}
+
+/* ===== CABEÇALHO ===== */
+/* Estilo do cabeçalho com fundo branco e layout flexível */
+header {
+    background-color: #FFFFFF;
+    display: flex; /* Usa flexbox para organizar elementos */
+    flex-direction: column; /* Organiza logo e linha em coluna */
+    align-items: flex-start; /* Alinha itens à esquerda */
+    padding: 0; /* Remove padding para linha cobrir tudo */
+    width: 100%; /* Ocupa toda a largura da tela */
+}
+
+/* Container da logo com espaçamento */
+.logo-container {
+    display: flex; /* Alinha logo horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    padding: 10px 0; /* Espaçamento vertical apenas */
+    width: 100%; /* Ocupa toda a largura */
+}
+
+/* Estilo do logo - altura fixa e margem à esquerda */
+.logo {
+  height: 55px; /* Altura do logo em pixels */
+  margin-left: 5%; /* Margem relativa (5% da tela) */
+  margin-top: 5px; /* Espaço acima do logo */
+}
+
+/* Linha divisória que cobre toda a página */
+hr {
+  width: 100%; /* Cobre toda a largura da página */
+  height: 0.5px; /* Espessura da linha */
+  background-color: #000; /* Cor preta */
+  border: none; /* Remove borda padrão */
+  margin: 0; /* Remove todas as margens */
+  opacity: 20%; /* Transparência da linha */
+}
+
+
+/* ===== CONTAINER PRINCIPAL ===== */
+/* Container para centralizar o formulário */
+main {
+  display: flex; /* Usa flexbox */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  min-height: calc(100vh - 100px); /* Altura mínima da tela */
+  padding: 20px; /* Espaçamento em torno */
+}
+
+/* Container quadrado principal com formulário */
+.square1 {
+    position: relative; /* Posicionamento relativo para organizar elementos */
+    width: 90%; /* Usa percentual em vez de px */
+    max-width: 715px; /* Largura máxima */
+    height: auto; /* Altura automática */
+    min-height: 643px; /* Altura mínima */
+    background: #0B061B; /* Cor de fundo roxo escuro */
+    border-radius: 37px; /* Bordas arredondadas */
+    padding: 40px 30px; /* Espaçamento interno */
+    box-sizing: border-box; /* Inclui padding na largura */
+    display: flex; /* Ativa flexbox para organizar elementos internos */
+    flex-direction: column; /* Organiza elementos em coluna vertical */
+}
+
+/* Container decorativo interno */
+.square2 {
+    display: none; /* Oculta em telas pequenas */
+}
+
+/* ===== TEXTOS E LABELS ===== */
+/* Título principal "Classificador de Emails" */
+.texto1 {
+    position: static; /* Posicionamento estático padrão */
+    width: 100%; /* Ocupa toda a largura disponível */
+    margin-bottom: 30px; /* Espaço abaixo */
+    font-weight: 600; /* Peso da fonte - semibold */
+    font-size: clamp(32px, 8vw, 48px); /* Tamanho responsivo entre 32px e 48px */
+    line-height: 1.3; /* Altura relativa da linha */
+    color: #FFFFFF; /* Cor branca */
+    text-align: center; /* Centraliza texto */
+}
+
+/* Label para upload de arquivo */
+.texto2 {
+    position: static; /* Posicionamento estático padrão */
+    width: 100%; /* Ocupa toda a largura */
+    margin-bottom: 10px; /* Espaço abaixo */
+    font-weight: 400; /* Peso da fonte - regular */
+    font-size: clamp(16px, 4vw, 20px); /* Tamanho responsivo */
+    line-height: 1.5; /* Altura relativa da linha */
+    color: #FFFFFF; /* Cor branca */
+}
+
+/* Label para textarea */
+.texto3 {
+    position: static; /* Posicionamento estático padrão */
+    width: 100%; /* Ocupa toda a largura */
+    margin-top: 20px; /* Espaço acima */
+    margin-bottom: 10px; /* Espaço abaixo */
+    font-weight: 400; /* Peso da fonte - regular */
+    font-size: clamp(16px, 4vw, 20px); /* Tamanho responsivo */
+    line-height: 1.5; /* Altura relativa da linha */
+    color: #FFFFFF; /* Cor branca */
+}
+
+/* ===== CAMPOS DE ENTRADA ===== */
+/* Input para upload de arquivo */
+.botao1 {
+    position: static; /* Posicionamento estático padrão */
+    display: block; /* Exibe como bloco */
+    width: 100%; /* Ocupa toda a largura */
+    margin-bottom: 20px; /* Espaço abaixo */
+    color: #FFFFFF; /* Cor do texto branco */
+}
+
+/* Textarea para inserir texto do email */
+.area1 {
+    position: static; /* Posicionamento estático padrão */
+    width: 100%; /* Ocupa toda a largura */
+    min-height: 150px; /* Altura mínima responsiva */
+    max-height: 300px; /* Altura máxima */
+    margin-bottom: 20px; /* Espaço abaixo */
+    border-radius: 10px; /* Bordas ligeiramente arredondadas */
+    padding: 12px; /* Espaçamento interno */
+    box-sizing: border-box; /* Inclui padding na largura */
+    font-family: 'Space Grotesk', sans-serif; /* Fonte consistente */
+    font-size: 16px; /* Tamanho legível */
+    flex-grow: 1; /* Expande para preencher espaço disponível */
+}
+
+/* ===== BOTÕES ===== */
+/* Botão principal de classificação */
+.botao2 {
+    position: static; /* Posicionamento estático padrão */
+    width: 100%; /* Ocupa toda a largura */
+    max-width: 248px; /* Largura máxima */
+    height: 65px; /* Altura do botão */
+    margin: 40px auto 0 auto; /* Espaço acima, centraliza horizontalmente */
+    display: block; /* Exibe como bloco */
+    background: rgba(179, 102, 230, 0.83); /* Fundo roxo semi-transparente */
+    border-radius: 32px; /* Bordas muito arredondadas */
+    border: none; /* Remove borda padrão */
+    color: #FFFFFF; /* Cor do texto branco */
+    cursor: pointer; /* Cursor em forma de mão ao passar */
+    font-family: 'Space Grotesk'; /* Fonte do botão */
+    font-style: normal; /* Estilo da fonte normal */
+    font-weight: 400; /* Peso da fonte - regular */
+    font-size: clamp(18px, 4vw, 24px); /* Tamanho responsivo */
+    line-height: 1.5; /* Altura relativa da linha */
+    transition: all 0.3s ease; /* Transição suave */
+    align-self: center; /* Centraliza o botão em relação ao container flex */
+}
+
+/* Efeito hover do botão - muda cor ao passar o mouse */
+.botao2:hover {
+    background-color: #27115a; /* Muda para roxo mais escuro */
+    transform: scale(1.05); /* Aumenta ligeiramente */
+}
+
+/* Efeito ativo (clique) do botão */
+.botao2:active {
+    transform: scale(0.98); /* Diminui ligeiramente */
+}
+
+/* ===== POPUP DE RESULTADO ===== */
+/* Overlay do popup (fundo escurecido) */
+.popup {
+  position: fixed; /* Posicionamento fixo na tela */
+  top: 0; left: 0; right: 0; bottom: 0; /* Ocupa toda a tela */
+  background-color: rgba(0, 0, 0, 0.6); /* Fundo preto semi-transparente */
+  display: none; /* Começa invisível, ativado via JavaScript */
+  justify-content: center; /* Centraliza conteúdo horizontalmente */
+  align-items: center; /* Centraliza conteúdo verticalmente */
+  z-index: 1000; /* Fica acima de outros elementos */
+  padding: 20px; /* Espaçamento em torno */
+}
+
+/* Conteúdo do popup */
+.popup-content {
+  background-color: white; /* Fundo branco */
+  color: black; /* Texto preto */
+  border-radius: 15px; /* Bordas arredondadas */
+  padding: 30px; /* Espaçamento interno */
+  width: 90%; /* Usa percentual */
+  max-width: 350px; /* Largura máxima */
+  text-align: center; /* Texto centralizado */
+  font-family: 'Space Grotesk', sans-serif; /* Fonte do popup */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); /* Sombra para profundidade */
+}
+
+/* Título do popup */
+.popup-content h2 {
+  margin-bottom: 15px; /* Espaço abaixo do título */
+  font-size: clamp(20px, 5vw, 24px); /* Tamanho responsivo */
+}
+
+/* Parágrafo do popup */
+.popup-content p {
+  margin: 10px 0; /* Espaço vertical */
+  word-wrap: break-word; /* Quebra palavras longas */
+}
+
+/* Botão do popup */
+.popup-content button {
+  margin-top: 20px; /* Espaço acima do botão */
+  padding: 10px 25px; /* Espaçamento interno do botão */
+  border: none; /* Remove borda padrão */
+  border-radius: 8px; /* Bordas levemente arredondadas */
+  background-color: #0b0221; /* Fundo roxo escuro */
+  color: white; /* Texto branco */
+  cursor: pointer; /* Cursor em forma de mão */
+  font-family: 'Space Grotesk', sans-serif; /* Fonte do botão */
+  font-size: 16px; /* Tamanho legível */
+  transition: background-color 0.3s ease; /* Transição suave */
+}
+
+/* Efeito hover do botão do popup */
+.popup-content button:hover {
+  background-color: #27115a; /* Muda para roxo mais claro */
+}
+
+/* ===== TELA DE CARREGAMENTO ===== */
+/* Overlay da tela de carregamento */
+.loading {
+  position: fixed; /* Posicionamento fixo na tela */
+  top: 0; left: 0; right: 0; bottom: 0; /* Ocupa toda a tela */
+  background-color: rgba(0, 0, 0, 0.6); /* Fundo preto semi-transparente */
+  display: none; /* Começa invisível, ativado via JavaScript */
+  justify-content: center; /* Centraliza conteúdo horizontalmente */
+  align-items: center; /* Centraliza conteúdo verticalmente */
+  z-index: 2000; /* Fica acima de todos os elementos */
+  padding: 20px; /* Espaçamento em torno */
+}
+
+/* Conteúdo da tela de carregamento */
+.loading-content {
+  background-color: #fff; /* Fundo branco */
+  padding: 30px; /* Espaçamento interno */
+  border-radius: 15px; /* Bordas arredondadas */
+  text-align: center; /* Texto centralizado */
+  font-family: 'Space Grotesk', sans-serif; /* Fonte */
+  color: #000; /* Texto preto */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); /* Sombra para profundidade */
+}
+
+/* ===== SPINNER DE CARREGAMENTO ===== */
+/* Elemento spinner com animação de rotação */
+.spinner {
+  border: 5px solid #f3f3f3; /* Borda cinza claro */
+  border-top: 5px solid #6f3ce2; /* Borda superior roxo */
+  border-radius: 50%; /* Forma circular */
+  width: 40px; /* Largura do spinner */
+  height: 40px; /* Altura do spinner */
+  animation: spin 1s linear infinite; /* Anima rotação infinita a cada 1 segundo */
+  margin: 0 auto 15px auto; /* Centraliza e adiciona espaço abaixo */
+}
+
+/* Animação de rotação do spinner */
+@keyframes spin {
+  0% { transform: rotate(0deg); } /* Começa em 0 graus */
+  100% { transform: rotate(360deg); } /* Termina em 360 graus (volta ao início) */
+}
+
+/* ===== MEDIA QUERIES - TELAS PEQUENAS ===== */
+/* Adaptações para celulares e tablets (até 768px) */
+@media (max-width: 768px) {
+  /* Logo menor em telas pequenas */
+  .logo {
+    height: 40px; /* Reduz altura */
+    margin-left: 3%; /* Margem proporcional */
+  }
+  
+  /* Container principal mais compacto */
+  .square1 {
+    width: 95%; /* Mais próximo das bordas */
+    padding: 30px 20px; /* Espaçamento reduzido */
+  }
+  
+  /* Textarea com altura reduzida */
+  .area1 {
+    min-height: 120px; /* Altura mínima menor */
+  }
+  
+  /* Botão com altura reduzida */
+  .botao2 {
+    height: 55px; /* Altura menor */
+  }
+}
+
+/* Adaptações para celulares muito pequenos (até 480px) */
+@media (max-width: 480px) {
+  /* Logo muito pequeno */
+  .logo {
+    height: 35px; /* Altura reduzida */
+    margin-left: 2%; /* Margem mínima */
+  }
+  
+  /* Container principal com padding mínimo */
+  .square1 {
+    width: 100%; /* Ocupa quase toda a tela */
+    padding: 20px 15px; /* Espaçamento mínimo */
+    border-radius: 20px; /* Bordas menos arredondadas */
+  }
+  
+  /* Textarea compacto */
+  .area1 {
+    min-height: 100px; /* Altura mínima menor ainda */
+  }
+  
+  /* Texto menor */
+  .texto1 {
+    font-size: clamp(24px, 6vw, 32px); /* Fonte menor */
+    margin-bottom: 20px; /* Menos espaço */
+  }
+  
+  /* Botão menor */
+  .botao2 {
+    height: 48px; /* Altura reduzida */
+    max-width: 100%; /* Ocupa mais espaço */
+  }
+}

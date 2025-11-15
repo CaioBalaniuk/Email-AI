@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!-- Define charset UTF-8 para suportar caracteres especiais -->
+    <meta charset="UTF-8">
+    <!-- Título da página exibido na aba do navegador -->
+    <title>Classificador de Emails</title>
+    <!-- Importa stylesheet CSS customizado para estilização -->
+    <link rel="stylesheet" href="../static/style.css">
+    <!-- Importa fonte Google Fonts "Space Grotesk" para melhor tipografia -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Cabeçalho da página com logo -->
+    <header>
+        <!-- Logo da aplicação -->
+        <img src="../static/images/logo.jpeg" class="logo">
+        <hr>
+    </header>
+
+    <!-- Conteúdo principal da aplicação -->
+    <main>
+        <div>
+            <!-- Container principal do formulário de classificação -->
+            <div class="square1">
+                <!-- Título da seção -->
+                <div class="texto1">Classificador de Emails</div>
+                <!-- Formulário para envio de email (arquivo ou texto) -->
+                <form method="POST" enctype="multipart/form-data">
+                    <!-- Elemento decorativo -->
+                    <div class="square2"></div>
+                    <!-- Rótulo para upload de arquivo -->
+                    <label class="texto2">Selecione o arquivo (.pdf ou .txt)</label>
+                    <!-- Campo de input para envio de arquivo -->
+                    <input type="file" name="email" class="botao1">
+                    <!-- Rótulo para alternativa de cole e cole de texto -->
+                    <label class="texto3">ou cole o texto aqui:</label>
+                    <!-- Textarea para inserir texto do email diretamente -->
+                    <textarea name="texto_email" class="area1" rows="6" placeholder="Digite aqui"></textarea>
+                    <!-- Botão para submeter o formulário e classificar o email -->
+                    <button class="botao2">Classificar Email</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Popup de resultado - exibido apenas quando há classificação (Jinja2 template) -->
+    {% if categoria %}
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <!-- Título do resultado -->
+            <h2>Resultado</h2>
+            <!-- Exibe a categoria do email classificado -->
+            <p><b>Categoria:</b> {{ categoria }}</p>
+            <!-- Exibe a resposta/sugestão gerada pela IA -->
+            <p><b>Resposta:</b> {{ resposta }}</p>
+            <!-- Botão para fechar o popup -->
+            <button id="fecharPopup">Fechar</button>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Tela de carregamento com spinner animado - exibida durante processamento -->
+    <div id="loading" class="loading">
+        <div class="loading-content">
+            <!-- Spinner animado para indicar carregamento -->
+            <div class="spinner"></div>
+            <!-- Mensagem informativa durante o processamento -->
+            <p>Classificando email...</p>
+        </div>
+    </div>
+
+    <!-- Scripts de interação do lado do cliente -->
+    <script>
+        // Seleciona elementos do DOM para manipulação
+        const popup = document.getElementById("popup");
+        const fechar = document.getElementById("fecharPopup");
+        const form = document.querySelector("form");
+        const loading = document.getElementById("loading");
+
+        // Verifica se há popup de resultado e configura interatividade
+        if (popup) {
+            // Exibe o popup quando há resultado
+            popup.style.display = "flex";
+            // Adiciona event listener ao botão "Fechar" para ocultar o popup
+            fechar.addEventListener("click", () => {
+                popup.style.display = "none";
+            });
+        }
+
+        // Mostra tela de "Carregando..." ao enviar o formulário
+        if (form) {
+            // Event listener acionado quando o formulário é submetido
+            form.addEventListener("submit", () => {
+                // Exibe a tela de carregamento enquanto processa
+                loading.style.display = "flex";
+            });
+        }
+    </script>
+</body>
+</html>
