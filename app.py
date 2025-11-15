@@ -62,7 +62,19 @@ def index():
     # Renderiza o template HTML passando categoria e resposta como variáveis
     return render_template("index.html", categoria=categoria, resposta=resposta)
 
-# Verifica se o script está sendo executado diretamente (não importado)
+# Este bloco só é executado quando rodamos o arquivo diretamente
+# Exemplo: python app.py
+# Ele não é executado quando o arquivo é importado como módulo
 if __name__ == "__main__":
-    # Inicia o servidor Flask em modo debug (auto-recarrega ao fazer mudanças)
-    app.run(debug=True)
+
+    # Importa o módulo os para acessar variáveis de ambiente
+    import os
+
+    # Railway (e outras plataformas) definem a porta em uma variável de ambiente chamada "PORT"
+    # Aqui tentamos pegar essa variável. Se não existir, usamos a porta 8080 como padrão.
+    port = int(os.environ.get("PORT", 8080))
+
+    # Inicia o servidor Flask
+    # host="0.0.0.0" permite que a aplicação seja acessível externamente (não apenas localmente)
+    # port=port faz o servidor usar a porta definida pelo ambiente (Railway) ou 8080 localmente
+    app.run(host="0.0.0.0", port=port)
